@@ -1,0 +1,30 @@
+name: dash_and_furious
+description: Dash and Furious demo project.
+version: 1.0.0+1
+publish_to: none
+
+environment:
+  sdk: ^3.4.0
+
+dependencies:
+  bloc: ^8.1.4
+  flame: ^1.18.0
+  flutter:
+    sdk: flutter
+  flutter_bloc: ^8.1.6
+  flutter_localizations:
+    sdk: flutter
+  intl: ^0.19.0
+
+dev_dependencies:
+  bloc_test: ^9.1.7
+  flame_test: ^1.16.2
+  flutter_test:
+    sdk: flutter
+  mockingjay: ^0.5.0
+  mocktail: ^1.0.4
+  very_good_analysis: ^6.0.0
+
+flutter:
+  uses-material-design: true
+  generate: true
