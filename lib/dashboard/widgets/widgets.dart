@@ -1,3 +1,4 @@
+export 'accelerator_button.dart';
 export 'clock.dart';
 export 'external_temp.dart';
 export 'fuel_gauge.dart';

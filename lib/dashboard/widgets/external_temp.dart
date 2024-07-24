@@ -7,6 +7,7 @@ class ExternalTemp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Row(
+      mainAxisSize: MainAxisSize.min,
       children: [
         Icon(Icons.sunny_snowing),
         SizedBox(width: AppSpacing.xs),

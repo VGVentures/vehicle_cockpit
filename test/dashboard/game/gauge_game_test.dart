@@ -22,6 +22,38 @@ void main() {
       l10n = await AppLocalizations.delegate.load(const Locale('en'));
     });
 
+    group('accelerate', () {
+      testWithGame<GaugeGame>(
+        'sets hittingGas to true',
+        () => GaugeGame(
+          onSpeedChanged: (_) {},
+          appTheme: const AppTheme().themeData,
+          l10n: l10n,
+        ),
+        (game) async {
+          game.accelerate();
+
+          expect(game.hittingGas, isTrue);
+        },
+      );
+    });
+
+    group('release', () {
+      testWithGame<GaugeGame>(
+        'sets hittingGas to false',
+        () => GaugeGame(
+          onSpeedChanged: (_) {},
+          appTheme: const AppTheme().themeData,
+          l10n: l10n,
+        ),
+        (game) async {
+          game.release();
+
+          expect(game.hittingGas, isFalse);
+        },
+      );
+    });
+
     group('onKeyEvent', () {
       testWithGame<GaugeGame>(
         'sets hittingGas to true when space is pressed and '

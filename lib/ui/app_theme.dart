@@ -76,7 +76,7 @@ class AppDarkTheme extends AppTheme {
       errorContainer: Color(0xFF93000A),
       onError: Color(0xFF690005),
       onErrorContainer: Color(0xFFFFDAD6),
-      surface: Color(0xFF001945),
+      surface: Color(0xFF224B93),
       onSurface: Color(0xFFD9E2FF),
       surfaceContainerHighest: Color(0xFF44474F),
       onSurfaceVariant: Color(0xFFC4C6D0),

@@ -1,7 +1,6 @@
 import 'package:dash_and_furious/dashboard/dashboard.dart';
 import 'package:dash_and_furious/l10n/l10n.dart';
 import 'package:dash_and_furious/theme_button/theme_button.dart';
-import 'package:dash_and_furious/ui/ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -46,13 +45,9 @@ class Demo extends StatelessWidget {
         elevation: 2,
         actions: const [ThemeButton()],
       ),
-      body: const Padding(
-        padding: EdgeInsets.symmetric(horizontal: AppSpacing.lg),
-        child: Center(
-          child: FittedBox(
-            fit: BoxFit.scaleDown,
-            child: Dashboard(),
-          ),
+      body: const SafeArea(
+        child: SizedBox.expand(
+          child: Dashboard(),
         ),
       ),
     );

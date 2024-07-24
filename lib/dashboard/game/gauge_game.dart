@@ -24,19 +24,23 @@ class GaugeGame extends FlameGame with KeyboardEvents {
   @override
   Color backgroundColor() => Colors.transparent;
 
+  void accelerate() => hittingGas = true;
+
+  void release() => hittingGas = false;
+
   @override
   KeyEventResult onKeyEvent(
     KeyEvent event,
     Set<LogicalKeyboardKey> keysPressed,
   ) {
-    final isKeyDown = event is KeyDownEvent;
+    final isKeyDown = event is KeyDownEvent || event is KeyRepeatEvent;
 
     final isSpace = keysPressed.contains(LogicalKeyboardKey.space);
 
     if (isSpace && isKeyDown) {
-      hittingGas = true;
+      accelerate();
     } else {
-      hittingGas = false;
+      release();
     }
     return KeyEventResult.handled;
   }
