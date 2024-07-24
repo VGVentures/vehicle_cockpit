@@ -1,5 +1,7 @@
 import 'package:dash_and_furious/dashboard/dashboard.dart';
+import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import '../../helpers/helpers.dart';
@@ -63,6 +65,37 @@ void main() {
 
         expect(find.byType(AcceleratorButton), findsNothing);
         expect(find.text(tester.l10n.instructions), findsOneWidget);
+      },
+    );
+
+    testWidgets(
+      'pressing and releasing space key updates the game',
+      (tester) async {
+        await tester.pumpApp(
+          Theme(
+            data: ThemeData().copyWith(platform: TargetPlatform.macOS),
+            child: const Dashboard(),
+          ),
+        );
+        await tester.pump();
+
+        final game = tester
+            .widget<GameWidget<GaugeGame>>(find.byType(GameWidget<GaugeGame>))
+            .game!;
+
+        await tester.sendKeyDownEvent(LogicalKeyboardKey.space);
+        await tester.pump();
+        expect(game.hittingGas, isTrue);
+
+        // Allows the game to run for a while
+        for (var i = 0; i < 120; i++) {
+          await tester.pump();
+        }
+
+        await tester.sendKeyUpEvent(LogicalKeyboardKey.space);
+        await tester.pump();
+
+        expect(game.hittingGas, isFalse);
       },
     );
   });
