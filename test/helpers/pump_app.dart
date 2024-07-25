@@ -6,12 +6,12 @@
 // https://opensource.org/licenses/MIT.
 
 import 'package:bloc_test/bloc_test.dart';
-import 'package:dash_and_furious/l10n/l10n.dart';
-import 'package:dash_and_furious/theme_button/theme_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockingjay/mockingjay.dart';
+import 'package:vehicle_cockpit/l10n/l10n.dart';
+import 'package:vehicle_cockpit/theme_button/theme_button.dart';
 
 class MockThemeModeCubit extends MockCubit<ThemeData>
     implements ThemeModeCubit {

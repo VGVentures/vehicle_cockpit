@@ -1,10 +1,10 @@
 import 'dart:math';
 
-import 'package:dash_and_furious/dashboard/dashboard.dart';
-import 'package:dash_and_furious/l10n/l10n.dart';
-import 'package:dash_and_furious/ui/ui.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
+import 'package:vehicle_cockpit/dashboard/dashboard.dart';
+import 'package:vehicle_cockpit/l10n/l10n.dart';
+import 'package:vehicle_cockpit/ui/ui.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({

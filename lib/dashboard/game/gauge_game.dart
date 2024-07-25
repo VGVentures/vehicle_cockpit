@@ -1,9 +1,9 @@
-import 'package:dash_and_furious/dashboard/dashboard.dart';
-import 'package:dash_and_furious/l10n/l10n.dart';
 import 'package:flame/events.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:vehicle_cockpit/dashboard/dashboard.dart';
+import 'package:vehicle_cockpit/l10n/l10n.dart';
 
 class GaugeGame extends FlameGame with KeyboardEvents {
   GaugeGame({

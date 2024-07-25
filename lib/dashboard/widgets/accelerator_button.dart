@@ -1,6 +1,6 @@
-import 'package:dash_and_furious/dashboard/dashboard.dart';
-import 'package:dash_and_furious/ui/ui.dart';
 import 'package:flutter/material.dart';
+import 'package:vehicle_cockpit/dashboard/dashboard.dart';
+import 'package:vehicle_cockpit/ui/ui.dart';
 
 class AcceleratorButton extends StatefulWidget {
   const AcceleratorButton({required this.game, super.key});

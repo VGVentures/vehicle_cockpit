@@ -1,8 +1,8 @@
-import 'package:dash_and_furious/dashboard/dashboard.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:vehicle_cockpit/dashboard/dashboard.dart';
 
 import '../../helpers/helpers.dart';
 

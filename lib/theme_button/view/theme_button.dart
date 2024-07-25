@@ -1,7 +1,7 @@
-import 'package:dash_and_furious/theme_button/theme_button.dart';
-import 'package:dash_and_furious/ui/ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:vehicle_cockpit/theme_button/theme_button.dart';
+import 'package:vehicle_cockpit/ui/ui.dart';
 
 class ThemeButton extends StatelessWidget {
   const ThemeButton({super.key});

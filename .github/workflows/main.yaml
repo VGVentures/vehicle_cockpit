@@ -1,4 +1,4 @@
-name: dash_and_furious
+name: vehicle_cockpit
 
 concurrency:
   group: $-$

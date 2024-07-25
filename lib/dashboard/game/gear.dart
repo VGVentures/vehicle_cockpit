@@ -1,8 +1,8 @@
 import 'dart:math';
 
-import 'package:dash_and_furious/dashboard/dashboard.dart';
 import 'package:flame/components.dart';
 import 'package:flutter/material.dart';
+import 'package:vehicle_cockpit/dashboard/dashboard.dart';
 
 class Gear extends PositionComponent with HasGameRef<GaugeGame> {
   Gear({

@@ -1,11 +1,11 @@
-import 'package:dash_and_furious/dashboard/dashboard.dart';
-import 'package:dash_and_furious/l10n/l10n.dart';
-import 'package:dash_and_furious/ui/ui.dart';
 import 'package:flame_test/flame_test.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+import 'package:vehicle_cockpit/dashboard/dashboard.dart';
+import 'package:vehicle_cockpit/l10n/l10n.dart';
+import 'package:vehicle_cockpit/ui/ui.dart';
 
 class _MockKeyDownEvent extends Mock implements KeyDownEvent {
   @override

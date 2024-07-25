@@ -1,6 +1,6 @@
-import 'package:dash_and_furious/dashboard/dashboard.dart';
 import 'package:flame/components.dart';
 import 'package:flutter/material.dart';
+import 'package:vehicle_cockpit/dashboard/dashboard.dart';
 
 class Speedometer extends TextComponent with HasGameRef<GaugeGame> {
   Speedometer({

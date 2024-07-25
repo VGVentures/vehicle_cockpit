@@ -1,8 +1,8 @@
-import 'package:dash_and_furious/dashboard/dashboard.dart';
-import 'package:dash_and_furious/l10n/l10n.dart';
-import 'package:dash_and_furious/theme_button/theme_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:vehicle_cockpit/dashboard/dashboard.dart';
+import 'package:vehicle_cockpit/l10n/l10n.dart';
+import 'package:vehicle_cockpit/theme_button/theme_button.dart';
 
 class DemoPage extends StatelessWidget {
   const DemoPage({super.key});

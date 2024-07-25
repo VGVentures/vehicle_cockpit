@@ -1,5 +1,5 @@
-name: dash_and_furious
-description: Dash and Furious demo project.
+name: vehicle_cockpit
+description: Vehicle Cockpit demo project.
 version: 1.0.0+1
 publish_to: none
 

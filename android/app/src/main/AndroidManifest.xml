@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.vgv.experience.dash_and_furious">
+    package="com.vgv.experience.vehicle_cockpit">
     <application
         android:label="${appName}"
         android:name="${applicationName}"
