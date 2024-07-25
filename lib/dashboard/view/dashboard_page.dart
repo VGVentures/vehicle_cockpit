@@ -146,25 +146,19 @@ class _Indicators extends StatelessWidget {
       children: [
         Expanded(
           flex: 2,
-          child: FittedBox(
-            fit: BoxFit.scaleDown,
-            child: SizedBox(
-              width: 250,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  FuelGauge(),
-                  SizedBox(height: AppSpacing.lg),
-                  Padding(
-                    padding: EdgeInsets.only(
-                      left: AppSpacing.xs,
-                      right: AppSpacing.lg,
-                    ),
-                    child: TemperatureGauge(),
-                  ),
-                ],
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              FuelGauge(),
+              SizedBox(height: AppSpacing.lg),
+              Padding(
+                padding: EdgeInsets.only(
+                  left: AppSpacing.xs,
+                  right: AppSpacing.lg,
+                ),
+                child: TemperatureGauge(),
               ),
-            ),
+            ],
           ),
         ),
         SizedBox(width: AppSpacing.xxxlg),
