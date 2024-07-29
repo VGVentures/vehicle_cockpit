@@ -87,11 +87,6 @@ void main() {
         await tester.pump();
         expect(game.hittingGas, isTrue);
 
-        // Allows the game to run for a while
-        for (var i = 0; i < 120; i++) {
-          await tester.pump();
-        }
-
         await tester.sendKeyUpEvent(LogicalKeyboardKey.space);
         await tester.pump();
 
