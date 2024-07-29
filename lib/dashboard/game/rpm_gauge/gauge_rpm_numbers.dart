@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'dart:math' as math;
 
-import 'package:dash_and_furious/dashboard/dashboard.dart';
 import 'package:flame/components.dart';
+import 'package:vehicle_cockpit/dashboard/dashboard.dart';
 
 class GaugeRpmNumbers extends PositionComponent with ParentIsA<GaugeComponent> {
   GaugeRpmNumbers({

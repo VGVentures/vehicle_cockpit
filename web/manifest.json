@@ -1,11 +1,11 @@
 {
-    "name": "Dash And Furious",
-    "short_name": "Dash And Furious",
+    "name": "Vehicle Cockpit",
+    "short_name": "Vehicle Cockpit",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "Dash and Furious demo project.",
+    "description": "Vehicle Cockpit demo project.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

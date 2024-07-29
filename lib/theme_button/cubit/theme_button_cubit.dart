@@ -1,6 +1,6 @@
-import 'package:dash_and_furious/ui/ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:vehicle_cockpit/ui/ui.dart';
 
 final darkTheme = const AppDarkTheme().themeData;
 final lightTheme = const AppTheme().themeData;

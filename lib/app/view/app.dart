@@ -1,6 +1,6 @@
-import 'package:dash_and_furious/demo/demo.dart';
-import 'package:dash_and_furious/l10n/l10n.dart';
 import 'package:flutter/material.dart';
+import 'package:vehicle_cockpit/demo/demo.dart';
+import 'package:vehicle_cockpit/l10n/l10n.dart';
 
 class App extends StatelessWidget {
   const App({super.key});

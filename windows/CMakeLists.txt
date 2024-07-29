@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.14)
-project(dash_and_furious LANGUAGES CXX)
+project(vehicle_cockpit LANGUAGES CXX)
 
-set(BINARY_NAME "dash_and_furious")
+set(BINARY_NAME "vehicle_cockpit")
 
 cmake_policy(SET CMP0063 NEW)
 

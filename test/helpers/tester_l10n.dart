@@ -1,6 +1,6 @@
-import 'package:dash_and_furious/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:vehicle_cockpit/l10n/l10n.dart';
 
 extension TesterL10n on WidgetTester {
   AppLocalizations get l10n {

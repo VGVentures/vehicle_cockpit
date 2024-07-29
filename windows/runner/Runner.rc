@@ -90,12 +90,12 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "com.vgv.experience.dash-and-furious" "\0"
-            VALUE "FileDescription", "dash_and_furious" "\0"
+            VALUE "FileDescription", "vehicle_cockpit" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "dash_and_furious" "\0"
+            VALUE "InternalName", "vehicle_cockpit" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2022 com.vgv.experience.dash-and-furious. All rights reserved." "\0"
-            VALUE "OriginalFilename", "dash_and_furious.exe" "\0"
-            VALUE "ProductName", "Dash And Furious" "\0"
+            VALUE "OriginalFilename", "vehicle_cockpit.exe" "\0"
+            VALUE "ProductName", "Vehicle Cockpit" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

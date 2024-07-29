@@ -1,5 +1,5 @@
-import 'package:dash_and_furious/ui/ui.dart';
 import 'package:flutter/material.dart';
+import 'package:vehicle_cockpit/ui/ui.dart';
 
 class ExternalTemp extends StatelessWidget {
   const ExternalTemp({super.key});

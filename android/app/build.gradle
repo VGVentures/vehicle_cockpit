@@ -29,7 +29,7 @@ if (keystorePropertiesFile.exists()) {
 }
 
 android {
-    namespace "com.vgv.experience.dash_and_furious"
+    namespace "com.vgv.experience.vehicle_cockpit"
     compileSdkVersion flutter.compileSdkVersion
     ndkVersion flutter.ndkVersion
 
@@ -47,8 +47,7 @@ android {
     }
 
     defaultConfig {
-        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId "com.vgv.experience.dash_and_furious"
+        applicationId "com.vgv.experience.vehicle_cockpit"
         // You can update the following values to match your application needs.
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
         minSdkVersion flutter.minSdkVersion
@@ -80,17 +79,17 @@ android {
         production {
             dimension "default"
             applicationIdSuffix ""
-            manifestPlaceholders = [appName: "Dash And Furious"]
+            manifestPlaceholders = [appName: "Vehicle Cockpit"]
         }
         staging {
             dimension "default"
             applicationIdSuffix ".stg"
-            manifestPlaceholders = [appName: "[STG] Dash And Furious"]
+            manifestPlaceholders = [appName: "[STG] Vehicle Cockpit"]
         }
         development {
             dimension "default"
             applicationIdSuffix ".dev"
-            manifestPlaceholders = [appName: "[DEV] Dash And Furious"]
+            manifestPlaceholders = [appName: "[DEV] Vehicle Cockpit"]
         }
     }
 
