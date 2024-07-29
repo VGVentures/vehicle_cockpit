@@ -66,7 +66,10 @@ class TemperatureGauge extends StatelessWidget {
           ),
         ),
         Padding(
-          padding: EdgeInsets.only(top: textTheme?.fontSize ?? 0),
+          padding: EdgeInsets.only(
+            top: textTheme?.fontSize ?? 0,
+            left: AppSpacing.sm,
+          ),
           child: const Icon(
             Icons.device_thermostat,
             size: AppSpacing.xlg,

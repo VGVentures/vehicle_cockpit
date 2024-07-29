@@ -9,6 +9,7 @@ class Clock extends StatelessWidget {
   Widget build(BuildContext context) {
     final formatter = DateFormat.Hm();
     return Row(
+      mainAxisSize: MainAxisSize.min,
       children: [
         const Icon(Icons.schedule),
         const SizedBox(width: AppSpacing.xs),

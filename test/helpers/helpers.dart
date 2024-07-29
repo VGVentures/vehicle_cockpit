@@ -6,3 +6,4 @@
 // https://opensource.org/licenses/MIT.
 
 export 'pump_app.dart';
+export 'tester_l10n.dart';

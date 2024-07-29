@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:dash_and_furious/dashboard/dashboard.dart';
 import 'package:dash_and_furious/l10n/l10n.dart';
 import 'package:dash_and_furious/ui/ui.dart';
@@ -56,93 +58,120 @@ class DashboardState extends State<Dashboard>
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     final theme = Theme.of(context);
+    final game = GaugeGame(
+      appTheme: theme,
+      l10n: l10n,
+      onSpeedChanged: onSpeedChanged,
+    );
+    final isMobile = theme.platform == TargetPlatform.android ||
+        theme.platform == TargetPlatform.iOS;
 
     return Stack(
-      clipBehavior: Clip.none,
       children: [
-        SizedBox(
-          height: 400,
-          width: 1000,
-          child: Card(
-            elevation: 2,
+        Center(
+          child: SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.all(AppSpacing.xlg),
-              child: Row(
+              child: Wrap(
+                alignment: WrapAlignment.center,
+                spacing: AppSpacing.xxxlg,
+                runSpacing: AppSpacing.xxxlg,
                 children: [
-                  const Flexible(
-                    child: _LeftContent(),
-                  ),
-                  Expanded(
-                    child: GameWidget(
-                      game: GaugeGame(
-                        appTheme: theme,
-                        l10n: l10n,
-                        onSpeedChanged: onSpeedChanged,
-                      ),
+                  SizedBox(
+                    width: 400,
+                    child: Column(
+                      children: [
+                        const _Indicators(),
+                        const SizedBox(height: AppSpacing.xlg),
+                        FittedBox(
+                          fit: BoxFit.scaleDown,
+                          child: SizedBox(
+                            width: 450,
+                            child: LapSection(
+                              controller: _controller,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                  Flexible(
-                    child: Container(
-                      padding: const EdgeInsets.only(
-                        left: AppSpacing.xxxlg,
-                      ),
-                      child: LapSection(
-                        controller: _controller,
-                      ),
-                    ),
+                  LayoutBuilder(
+                    builder: (context, constraints) {
+                      final width = min<double>(400, constraints.maxWidth);
+                      return SizedBox.square(
+                        dimension: width * .75,
+                        child: Transform.scale(
+                          scale: width / 500,
+                          child: GameWidget(
+                            game: game,
+                          ),
+                        ),
+                      );
+                    },
                   ),
                 ],
               ),
             ),
           ),
         ),
-        Positioned.fill(
-          bottom: -AppSpacing.xxlg,
-          child: Align(
-            alignment: Alignment.bottomCenter,
-            child: Text(
-              l10n.instructions,
-              style: theme.textTheme.titleLarge,
+        if (isMobile)
+          Positioned(
+            bottom: AppSpacing.xlg,
+            right: AppSpacing.xlg,
+            child: AcceleratorButton(game: game),
+          )
+        else
+          Positioned(
+            bottom: AppSpacing.xlg,
+            right: AppSpacing.xlg,
+            left: AppSpacing.xlg,
+            child: Center(
+              child: Text(
+                l10n.instructions,
+                style: theme.textTheme.bodyMedium,
+              ),
             ),
           ),
-        ),
       ],
     );
   }
 }
 
-class _LeftContent extends StatelessWidget {
-  const _LeftContent();
+class _Indicators extends StatelessWidget {
+  const _Indicators();
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
-      mainAxisAlignment: MainAxisAlignment.end,
-      crossAxisAlignment: CrossAxisAlignment.end,
+    return const Row(
       children: [
-        Row(
-          children: [
-            Clock(),
-            SizedBox(width: AppSpacing.lg),
-            ExternalTemp(),
-          ],
-        ),
-        Spacer(),
-        Padding(
-          padding: EdgeInsets.only(
-            right: AppSpacing.xxxlg,
+        Expanded(
+          flex: 2,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              FuelGauge(),
+              SizedBox(height: AppSpacing.lg),
+              Padding(
+                padding: EdgeInsets.only(
+                  left: AppSpacing.xs,
+                  right: AppSpacing.lg,
+                ),
+                child: TemperatureGauge(),
+              ),
+            ],
           ),
-          child: FuelGauge(),
         ),
-        SizedBox(height: AppSpacing.lg),
-        Padding(
-          padding: EdgeInsets.only(
-            right: AppSpacing.xxlg,
-            left: AppSpacing.xxlg,
+        SizedBox(width: AppSpacing.xxxlg),
+        Expanded(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Clock(),
+              SizedBox(height: AppSpacing.lg),
+              ExternalTemp(),
+            ],
           ),
-          child: TemperatureGauge(),
         ),
-        Spacer(),
       ],
     );
   }

@@ -42,26 +42,34 @@ class LapSectionState extends State<LapSection> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.start,
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.end,
       children: [
-        Lap(
-          bestLap: true,
-          number: bestLap,
-          child: Text(_lapTime(bestTime)),
+        Flexible(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Lap(
+                bestLap: true,
+                number: bestLap,
+                child: Text(_lapTime(bestTime)),
+              ),
+              const SizedBox(height: AppSpacing.sm),
+              Lap(
+                bestLap: false,
+                number: currentLap,
+                child: LapTimer(stopwatch: stopwatch),
+              ),
+            ],
+          ),
         ),
-        const SizedBox(height: AppSpacing.sm),
-        Lap(
-          bestLap: false,
-          number: currentLap,
-          child: LapTimer(stopwatch: stopwatch),
-        ),
-        const SizedBox(height: AppSpacing.xxlg),
-        AnimatedBuilder(
-          animation: widget.controller,
-          builder: (_, __) => RouteMap(
-            animationValue: widget.controller.value,
+        const SizedBox(width: AppSpacing.xlg),
+        Expanded(
+          child: AnimatedBuilder(
+            animation: widget.controller,
+            builder: (_, __) => RouteMap(
+              animationValue: widget.controller.value,
+            ),
           ),
         ),
       ],
