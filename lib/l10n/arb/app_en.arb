@@ -93,5 +93,5 @@
         "type": "text",
         "placeholders": {}
     },
-    "instructions": "Press SPACE to go!"
+    "instructions": "Hold spacebar to accelerate."
 }
