@@ -9,14 +9,15 @@ class ThemeButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = context.watch<ThemeModeCubit>().state;
-    return Align(
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: AppSpacing.sm),
       child: InkWell(
         onTap: () => context.read<ThemeModeCubit>().toggle(),
         customBorder: const CircleBorder(),
         child: Padding(
           padding: const EdgeInsets.all(AppSpacing.sm),
           child: Icon(
-            theme.isLightTheme
+            !theme.isLightTheme
                 ? Icons.light_mode_outlined
                 : Icons.dark_mode_outlined,
           ),

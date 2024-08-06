@@ -19,32 +19,32 @@ class AppTheme {
   ColorScheme get _colorScheme {
     return const ColorScheme(
       brightness: Brightness.light,
-      primary: Color(0xFF015AC1),
-      onPrimary: Color(0xFFFFFFFF),
-      primaryContainer: Color(0xFFD8E2FF),
-      onPrimaryContainer: Color(0xFF001A41),
-      secondary: Color(0xFF345CA8),
-      onSecondary: Color(0xFFFFFFFF),
-      secondaryContainer: Color(0xFFD9E2FF),
-      onSecondaryContainer: Color(0xFF001A43),
-      tertiary: Color(0xFF84468E),
-      onTertiary: Color(0xFFFFFFFF),
-      tertiaryContainer: Color(0xFFFFD6FF),
-      onTertiaryContainer: Color(0xFF350040),
-      error: Color(0xFFBA1A1A),
-      errorContainer: Color(0xFFFFDAD6),
-      onError: Color(0xFFFFFFFF),
-      onErrorContainer: Color(0xFF410002),
-      surface: Color(0xFFFEFBFF),
-      onSurface: Color(0xFF001945),
-      surfaceContainerHighest: Color(0xFFE1E2EC),
-      onSurfaceVariant: Color(0xFF44474F),
-      outline: Color(0xFF75777F),
-      onInverseSurface: Color(0xFFEEF0FF),
-      inverseSurface: Color(0xFF002C6F),
-      inversePrimary: Color(0xFFADC6FF),
-      shadow: Color(0xFF000000),
-      surfaceTint: Color(0xFF015AC1),
+      primary: Color(0xFF424242), // Medium Gray
+      onPrimary: Color(0xFFFFFFFF), // White
+      primaryContainer: Color(0xFFBDBDBD), // Light Gray
+      onPrimaryContainer: Color(0xFF212121), // Dark Gray
+      secondary: Color(0xFF757575), // Gray
+      onSecondary: Color(0xFFFFFFFF), // White
+      secondaryContainer: Color(0xFFD7CCC8), // Very Light Gray
+      onSecondaryContainer: Color(0xFF494949), // Medium Dark Gray
+      tertiary: Color(0xFF616161), // Darker Gray
+      onTertiary: Color(0xFFFFFFFF), // White
+      tertiaryContainer: Color(0xFFB0BEC5), // Light Blue Gray
+      onTertiaryContainer: Color(0xFF37474F), // Dark Blue Gray
+      error: Color(0xFFD32F2F), // Red
+      errorContainer: Color(0xFFFFCDD2), // Light Red
+      onError: Color(0xFFFFFFFF), // White
+      onErrorContainer: Color(0xFFC62828), // Dark Red
+      surface: Color(0xFFF5F5F5), // Very Light Gray
+      onSurface: Color(0xFF212121), // Almost Black
+      surfaceContainerHighest: Color(0xFFEEEEEE), // Very Light Gray
+      onSurfaceVariant: Color(0xFF757575), // Medium Gray
+      outline: Color(0xFFBDBDBD), // Light Gray
+      onInverseSurface: Color(0xFFFAFAFA), // Very Light Gray
+      inverseSurface: Color(0xFF212121), // Almost Black
+      inversePrimary: Color(0xFF424242), // Medium Gray
+      shadow: Color(0xFF000000), // Black
+      surfaceTint: Color(0xFF424242), // Medium Gray
     );
   }
 }
@@ -60,32 +60,32 @@ class AppDarkTheme extends AppTheme {
   ColorScheme get _colorScheme {
     return const ColorScheme(
       brightness: Brightness.dark,
-      primary: Color(0xFFADC6FF),
-      onPrimary: Color(0xFF002E69),
-      primaryContainer: Color(0xFF004494),
-      onPrimaryContainer: Color(0xFFD8E2FF),
-      secondary: Color(0xFFAFC6FF),
-      onSecondary: Color(0xFF002D6C),
-      secondaryContainer: Color(0xFF15448F),
-      onSecondaryContainer: Color(0xFFD9E2FF),
-      tertiary: Color(0xFFF6ADFE),
-      onTertiary: Color(0xFF50155C),
-      tertiaryContainer: Color(0xFF692E74),
-      onTertiaryContainer: Color(0xFFFFD6FF),
-      error: Colors.pink,
-      errorContainer: Color(0xFF93000A),
-      onError: Color(0xFF690005),
-      onErrorContainer: Color(0xFFFFDAD6),
-      surface: Color(0xFF224B93),
-      onSurface: Color(0xFFD9E2FF),
-      surfaceContainerHighest: Color(0xFF44474F),
-      onSurfaceVariant: Color(0xFFC4C6D0),
-      outline: Color(0xFF8E9099),
-      onInverseSurface: Color(0xFF001945),
-      inverseSurface: Color(0xFFD9E2FF),
-      inversePrimary: Color(0xFF015AC1),
-      shadow: Color(0xFF000000),
-      surfaceTint: Color(0xFFADC6FF),
+      primary: Color(0xFFE0E0E0), // Light Gray
+      onPrimary: Color(0xFF1F1F1F), // Dark Gray
+      primaryContainer: Color(0xFF373737), // Medium Gray
+      onPrimaryContainer: Color(0xFFE0E0E0), // Light Gray
+      secondary: Color(0xFFB0BEC5), // Light Blue Gray
+      onSecondary: Color(0xFF263238), // Dark Blue Gray
+      secondaryContainer: Color(0xFF455A64), // Medium Blue Gray
+      onSecondaryContainer: Color(0xFFB0BEC5), // Light Blue Gray
+      tertiary: Color(0xFF5D737E), // Muted Blue
+      onTertiary: Color(0xFFFFFFFF), // White
+      tertiaryContainer: Color(0xFF455A64), // Medium Blue Gray
+      onTertiaryContainer: Color(0xFFB0BEC5), // Light Blue Gray
+      error: Color(0xFFCF6679), // Pink
+      errorContainer: Color(0xFFB00020), // Red
+      onError: Color(0xFFFFFFFF), // White
+      onErrorContainer: Color(0xFF370B1E), // Dark Red
+      surface: Color(0xFF121212), // Black
+      onSurface: Color(0xFFE0E0E0), // Light Gray
+      surfaceContainerHighest: Color(0xFF2C2C2C), // Medium Gray
+      onSurfaceVariant: Color(0xFF737373), // Gray
+      outline: Color(0xFF8A8A8A), // Light Gray
+      onInverseSurface: Color(0xFF121212), // Black
+      inverseSurface: Color(0xFFE0E0E0), // Light Gray
+      inversePrimary: Color(0xFF1F1F1F), // Dark Gray
+      shadow: Color(0xFF000000), // Black
+      surfaceTint: Color(0xFFE0E0E0), // Light Gray
     );
   }
 }
