@@ -2,10 +2,14 @@ import 'package:vehicle_sim/src/vehicle.dart';
 
 /// Vehicle models.
 abstract class Vehicles {
-  /// Vehicle model based on a typical, compact, crossover SUV.
+  /// Vehicle description based on a typical, compact, crossover SUV and a lot
+  /// of guesswork.
   static final compactCrossoverSUV = Vehicle(
     engineRpmRedline: 6500,
     engineRpmMaximum: 8000,
+    engineRpmAcceleration: 2000,
+    engineRpmDeceleration: 1500,
+    engineRpmIdle: 800,
     transmissionRatios: const {
       1: 4.69,
       2: 3.31,

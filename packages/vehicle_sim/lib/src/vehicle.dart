@@ -8,6 +8,9 @@ final class Vehicle extends Equatable {
   Vehicle({
     required this.engineRpmRedline,
     required this.engineRpmMaximum,
+    required this.engineRpmAcceleration,
+    required this.engineRpmDeceleration,
+    required this.engineRpmIdle,
     required this.transmissionRatios,
     required this.differentialRatio,
     required this.tireCircumference,
@@ -48,6 +51,18 @@ final class Vehicle extends Equatable {
   /// the redline range that can result in engine damage.
   final double engineRpmMaximum;
 
+  /// Approximate acceleration for how many RPM would be gained per second if
+  /// the gas pedal was held all the way down.
+  final double engineRpmAcceleration;
+
+  /// Approximate deceleration for how many RPM would be lost per second if
+  /// the gas pedal was released. Assumes the vehicle is in gear (not in
+  /// neutral).
+  final double engineRpmDeceleration;
+
+  /// The RPM at which the engine idles when the vehicle is not moving.
+  final double engineRpmIdle;
+
   /// Map of gear number to gear ratio.
   final Map<int, double> transmissionRatios;
 
@@ -63,6 +78,9 @@ final class Vehicle extends Equatable {
   List<Object?> get props => [
         engineRpmRedline,
         engineRpmMaximum,
+        engineRpmAcceleration,
+        engineRpmDeceleration,
+        engineRpmIdle,
         transmissionRatios,
         differentialRatio,
         tireCircumference,

@@ -9,6 +9,17 @@ void main() {
     test('instantiates with defaults', () {
       final sim = VehicleSim(vehicle: vehicle);
       expect(sim.vehicle, vehicle);
+      expect(sim.engineRpm, 0);
+    });
+
+    test('knows when to upshift', () {
+      final sim = VehicleSim(vehicle: vehicle, engineRpm: 7000);
+      expect(sim.shouldUpshift, isTrue);
+    });
+
+    test('knows when to downshift', () {
+      final sim = VehicleSim(vehicle: vehicle, engineRpm: 1000, gear: 2);
+      expect(sim.shouldDownshift, isTrue);
     });
 
     group('gear', () {
@@ -55,6 +66,20 @@ void main() {
         // Normal engine RPM in a low gear should result in slow speeds (20 mph)
         final sim = VehicleSim(vehicle: vehicle, engineRpm: 3000, gear: 2);
         expect(sim.speed, closeTo(20, 1));
+      });
+    });
+
+    group('simulate', () {
+      test('upshifts', () {
+        final sim = VehicleSim(vehicle: vehicle, engineRpm: 7000)
+          ..simulate(1, 1);
+        expect(sim.gear, 2);
+      });
+
+      test('downshifts', () {
+        final sim = VehicleSim(vehicle: vehicle, engineRpm: 1000, gear: 2)
+          ..simulate(1, 0);
+        expect(sim.gear, 1);
       });
     });
   });
