@@ -23,12 +23,16 @@ class DashboardState extends State<Dashboard>
   late final AnimationController _controller;
 
   void onSpeedChanged(double speed) {
+    if (speed <= 0) {
+      _controller.stop();
+      return;
+    }
+
     // Based on the max speed of 160mph, 0.222222 miles would be the distance
     // covered in 5000 milliseconds if going max speed.
+
     const distance = 0.222222;
     final timeInMilliseconds = (distance / speed) * 3600 * 1000;
-
-    if (speed <= 0) _controller.stop();
 
     _controller
       ..duration = Duration(
