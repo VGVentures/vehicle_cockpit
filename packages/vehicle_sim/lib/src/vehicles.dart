@@ -8,7 +8,7 @@ abstract class Vehicles {
     engineRpmRedline: 6500,
     engineRpmMaximum: 8000,
     engineRpmAcceleration: 2000,
-    engineRpmDeceleration: 2500,
+    engineRpmDeceleration: 1500,
     engineRpmIdle: 800,
     transmissionRatios: const {
       1: 4.69,
