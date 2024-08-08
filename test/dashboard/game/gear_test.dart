@@ -5,18 +5,23 @@ import 'package:vehicle_cockpit/dashboard/dashboard.dart';
 import 'package:vehicle_cockpit/l10n/l10n.dart';
 import 'package:vehicle_cockpit/ui/ui.dart';
 
+import '../../helpers/helpers.dart';
+
 void main() {
   group('Gear', () {
     late AppLocalizations l10n;
+    late MockVehicleSim sim;
 
     setUp(() async {
       l10n = await AppLocalizations.delegate.load(const Locale('en'));
+      sim = MockVehicleSim();
     });
 
     group('update', () {
       testWithGame<GaugeGame>(
         'gearText updates correctly as speed increases',
         () => GaugeGame(
+          sim: sim,
           onSpeedChanged: (_) {},
           appTheme: const AppTheme().themeData,
           l10n: l10n,

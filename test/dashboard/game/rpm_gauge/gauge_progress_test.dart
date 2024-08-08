@@ -7,17 +7,22 @@ import 'package:vehicle_cockpit/dashboard/dashboard.dart';
 import 'package:vehicle_cockpit/l10n/l10n.dart';
 import 'package:vehicle_cockpit/ui/ui.dart';
 
+import '../../../helpers/helpers.dart';
+
 void main() {
   group('GaugeProgress', () {
     late final AppLocalizations l10n;
+    late MockVehicleSim sim;
 
     setUpAll(() async {
       l10n = await AppLocalizations.delegate.load(const Locale('en'));
+      sim = MockVehicleSim();
     });
 
     testWithGame<GaugeGame>(
       'updates color when rpm is in danger zone',
       () => GaugeGame(
+        sim: sim,
         onSpeedChanged: (_) {},
         appTheme: AppTheme().themeData,
         l10n: l10n,

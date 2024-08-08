@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:vehicle_cockpit/dashboard/dashboard.dart';
 import 'package:vehicle_cockpit/l10n/l10n.dart';
 import 'package:vehicle_cockpit/ui/ui.dart';
+import 'package:vehicle_sim/vehicle_sim.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({
@@ -63,6 +64,7 @@ class DashboardState extends State<Dashboard>
     final l10n = context.l10n;
     final theme = Theme.of(context);
     final game = GaugeGame(
+      sim: VehicleSim(vehicle: Vehicles.compactCrossoverSUV),
       appTheme: theme,
       l10n: l10n,
       onSpeedChanged: onSpeedChanged,
