@@ -80,6 +80,16 @@ void main() {
           ..simulate(1, 0);
         expect(sim.gear, 1);
       });
+
+      test('clamps to maximum engine rpm', () {
+        final sim = VehicleSim(
+          vehicle: vehicle,
+          engineRpm: vehicle.engineRpmMaximum,
+          gear: 8,
+        )..simulate(1, 1);
+
+        expect(sim.engineRpm, vehicle.engineRpmMaximum);
+      });
     });
   });
 }

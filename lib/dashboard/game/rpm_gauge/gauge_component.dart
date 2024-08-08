@@ -3,6 +3,7 @@ import 'dart:math' as math;
 import 'package:flame/components.dart';
 import 'package:flutter/material.dart';
 import 'package:vehicle_cockpit/dashboard/dashboard.dart';
+import 'package:vehicle_cockpit/util/math_utils.dart';
 
 class GaugeComponent extends PositionComponent {
   GaugeComponent({
@@ -18,19 +19,22 @@ class GaugeComponent extends PositionComponent {
   final int dangerZone;
   final ThemeData appTheme;
   double _progress = 0;
+  double _targetProgress = 0;
 
   final _rng = math.Random();
 
   double get progress => _progress;
 
-  set progress(double value) {
-    if (value < 0) {
-      _progress = 0;
+  void setProgress(double value, double delta) {
+    var current = value;
+    if (current < 0) {
+      current = 0;
     } else if (value >= 1) {
-      _progress = 1 - _rng.nextDouble() * 0.02;
-    } else {
-      _progress = value;
+      current = 1 - _rng.nextDouble() * 0.02;
     }
+
+    _targetProgress = current;
+    _progress = _progress.expDecay(_targetProgress, 16, delta);
   }
 
   @override

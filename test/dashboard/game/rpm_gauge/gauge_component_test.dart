@@ -9,7 +9,7 @@ void main() {
         maxRpm: 100,
         dangerZone: 80,
         appTheme: const AppTheme().themeData,
-      )..progress = 1;
+      )..setProgress(1, 1);
 
       expect(gauge.progress, lessThan(1));
     });

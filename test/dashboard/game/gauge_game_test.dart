@@ -5,16 +5,17 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:vehicle_cockpit/dashboard/dashboard.dart';
 import 'package:vehicle_cockpit/l10n/l10n.dart';
 import 'package:vehicle_cockpit/ui/ui.dart';
+import 'package:vehicle_sim/vehicle_sim.dart';
 
 import '../../helpers/helpers.dart';
 
 void main() {
   group('GaugeGame', () {
     late AppLocalizations l10n;
-    late MockVehicleSim sim;
+    late VehicleSim sim;
 
     setUp(() async {
-      sim = MockVehicleSim();
+      sim = VehicleSim(vehicle: Vehicles.compactCrossoverSUV);
       l10n = await AppLocalizations.delegate.load(const Locale('en'));
     });
 

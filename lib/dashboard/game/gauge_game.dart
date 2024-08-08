@@ -84,11 +84,9 @@ class GaugeGame extends FlameGame with KeyboardEvents {
   void update(double dt) {
     sim.simulate(dt, hittingGas ? 1.0 : 0.0);
 
-    gauge.progress = sim.engineRpm / sim.vehicle.engineRpmMaximum;
+    gauge.setProgress(sim.engineRpm / sim.vehicle.engineRpmMaximum, dt);
     speedometer.speed = sim.speed;
     gear.gearText.text = sim.gear.toString();
-
-    print('gear: ${sim.gear} - speed: ${sim.speed} - rpm: ${sim.engineRpm}');
 
     onSpeedChanged(sim.speed);
 
