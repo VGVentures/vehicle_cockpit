@@ -59,8 +59,8 @@ class GaugeGame extends FlameGame with KeyboardEvents {
       gauge = GaugeComponent(
         size: Vector2.all(340),
         position: size / 2,
-        maxRpm: 9,
-        dangerZone: 8,
+        maxRpm: (sim.vehicle.engineRpmMaximum / 1000).round(),
+        dangerZone: (sim.vehicle.engineRpmRedline / 1000).round(),
         appTheme: appTheme,
       ),
     );
@@ -82,18 +82,15 @@ class GaugeGame extends FlameGame with KeyboardEvents {
 
   @override
   void update(double dt) {
-    var rpm = gauge.progress;
-    var speed = speedometer.speed;
-    if (hittingGas) {
-      rpm += .008;
-      speed += rpm / 8;
-    } else {
-      rpm -= .008;
-      speed -= (speed / 500) + .02;
-    }
-    onSpeedChanged(speed);
-    gauge.progress = rpm;
-    speedometer.speed = speed;
+    sim.simulate(dt, hittingGas ? 1.0 : 0.0);
+
+    gauge.progress = sim.engineRpm / sim.vehicle.engineRpmMaximum;
+    speedometer.speed = sim.speed;
+    gear.gearText.text = sim.gear.toString();
+
+    print('gear: ${sim.gear} - speed: ${sim.speed} - rpm: ${sim.engineRpm}');
+
+    onSpeedChanged(sim.speed);
 
     super.update(dt);
   }

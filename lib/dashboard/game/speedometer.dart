@@ -8,7 +8,7 @@ class Speedometer extends TextComponent with HasGameRef<GaugeGame> {
     super.position,
   }) : super(
           anchor: Anchor.center,
-          text: speed.clamp(0, 160).round().toString(),
+          text: speed.round().toString(),
         );
 
   double speed;
@@ -57,7 +57,6 @@ class Speedometer extends TextComponent with HasGameRef<GaugeGame> {
 
   @override
   void update(double dt) {
-    speed = speed.clamp(0, 160);
     text = speed.round().toString();
     _mph.position = Vector2(size.x / 2, size.y);
     if (speed >= 120) {

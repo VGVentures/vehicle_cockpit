@@ -48,12 +48,12 @@ class VehicleSim {
 
   /// Whether the vehicle should upshift.
   bool get shouldUpshift =>
-      _engineRpm > vehicle.engineRpmRedline * upshiftTolerance &&
+      _engineRpm > (vehicle.engineRpmRedline * upshiftTolerance) &&
       gear < vehicle.transmissionRatios.length;
 
   /// Whether the vehicle should downshift.
   bool get shouldDownshift =>
-      _engineRpm < vehicle.engineRpmRedline * downshiftTolerance && gear > 1;
+      _engineRpm < (vehicle.engineRpmRedline * downshiftTolerance) && gear > 1;
 
   int _gear;
   double _engineRpm;
@@ -83,6 +83,23 @@ class VehicleSim {
       'Accelerator pedal value must be between 0 and 1.',
     );
 
+    // Automatic transmission and engine RPM adjustment based on gear.
+
+    // important: capture speed based on current gear and RPM before any
+    // potential gear change. This allows us to correctly compute the new engine
+    // RPM after changing gears.
+    final speed = this.speed;
+
+    if (shouldUpshift) {
+      gear++;
+      _engineRpm = computeEngineRpmFromSpeed(speed);
+    }
+
+    if (shouldDownshift) {
+      gear--;
+      _engineRpm = computeEngineRpmFromSpeed(speed);
+    }
+
     final engineRpmChange = delta *
         (acceleratorPedal > 0
             ? vehicle.engineRpmAcceleration
@@ -96,9 +113,11 @@ class VehicleSim {
     } else if (_engineRpm > vehicle.engineRpmMaximum) {
       _engineRpm = vehicle.engineRpmMaximum;
     }
-
-    // Automatic transmission:
-    if (shouldUpshift) gear++;
-    if (shouldDownshift) gear--;
   }
+
+  /// Computes engine RPM based on the vehicle's speed (in mph).
+  double computeEngineRpmFromSpeed(double speed) =>
+      // Similar to the speed computation above, but solved for engine RPM.
+      (speed * inchesPerMile * gearRatio * vehicle.differentialRatio) /
+      (vehicle.tireCircumference * minutesPerHour);
 }
