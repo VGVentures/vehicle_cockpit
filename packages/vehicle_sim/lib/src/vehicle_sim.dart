@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:vehicle_sim/src/vehicle.dart';
 
 /// {@template vehicle_sim}
@@ -83,35 +85,52 @@ class VehicleSim {
       'Accelerator pedal value must be between 0 and 1.',
     );
 
-    // Automatic transmission and engine RPM adjustment based on gear.
+    var throttle = acceleratorPedal;
 
-    // important: capture speed based on current gear and RPM before any
-    // potential gear change. This allows us to correctly compute the new engine
-    // RPM after changing gears.
-    final speed = this.speed;
+    if (acceleratorPedal == 0) {
+      // Apply reverse force if not accelerating — just a fudge to make the
+      // demo feel better and decelerate faster.
+      throttle = -0.6;
+    }
+
+    // Figure out how much torque should be added to the engine.
+    final engineTorque = vehicle.torqueCurve(_engineRpm) * throttle;
+    final wheelTorque = engineTorque * gearRatio * vehicle.differentialRatio;
+    final wheelForce = wheelTorque / vehicle.tireRadiusFt;
+    final maxTractionForce = vehicle.tireFrictionCoefficient * vehicle.weight;
+    final appliedForce = min(wheelForce, maxTractionForce);
+    final speedFtPerSecond = speed * kFeetPerMile / kSecondsPerHour;
+    final dragForce = 0.5 *
+        kAirDensitySlugsFt3 *
+        vehicle.dragCoefficient *
+        vehicle.frontalArea *
+        pow(speedFtPerSecond, 2);
+
+    final rollingResistanceForce =
+        kRoadRollingResistanceCoefficient * vehicle.weight;
+
+    final netForce = appliedForce - dragForce - rollingResistanceForce;
+
+    final acceleration = netForce / vehicle.mass;
+
+    final newSpeedFtPerSecond = speedFtPerSecond + acceleration * delta;
+    final newSpeedMph = newSpeedFtPerSecond * kSecondsPerHour / kFeetPerMile;
+    _engineRpm = computeEngineRpmFromSpeed(newSpeedMph);
+
+    // Clamp engine RPM between idle and maximum.
+    _engineRpm =
+        _engineRpm.clamp(vehicle.engineRpmIdle, vehicle.engineRpmMaximum);
+
+    // Automatic transmission and engine RPM adjustment based on gear.
 
     if (shouldUpshift) {
       gear++;
-      _engineRpm = computeEngineRpmFromSpeed(speed);
+      _engineRpm = computeEngineRpmFromSpeed(newSpeedMph);
     }
 
     if (shouldDownshift) {
       gear--;
-      _engineRpm = computeEngineRpmFromSpeed(speed);
-    }
-
-    final engineRpmChange = delta *
-        (acceleratorPedal > 0
-            ? vehicle.engineRpmAcceleration
-            : -vehicle.engineRpmDeceleration);
-
-    _engineRpm += engineRpmChange;
-
-    // Clamp engine RPM between idle and maximum.
-    if (_engineRpm < vehicle.engineRpmIdle) {
-      _engineRpm = vehicle.engineRpmIdle;
-    } else if (_engineRpm > vehicle.engineRpmMaximum) {
-      _engineRpm = vehicle.engineRpmMaximum;
+      _engineRpm = computeEngineRpmFromSpeed(newSpeedMph);
     }
   }
 

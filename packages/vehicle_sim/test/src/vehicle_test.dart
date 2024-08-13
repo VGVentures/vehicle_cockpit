@@ -7,23 +7,18 @@ void main() {
     test('equality', () {
       expect(
         Vehicle(
-          engineRpmRedline: 6500,
-          engineRpmMaximum: 8000,
-          engineRpmAcceleration: 2000,
-          engineRpmDeceleration: 1500,
-          engineRpmIdle: 800,
-          transmissionRatios: const {
-            1: 4.69,
-            2: 3.31,
-            3: 3.01,
-            4: 1.92,
-            5: 1.45,
-            6: 1,
-            7: 0.75,
-            8: 0.62,
-          },
-          differentialRatio: 3.81,
-          tireCircumference: 90,
+          engineRpmRedline: Vehicles.compactCrossoverSUV.engineRpmRedline,
+          engineRpmMaximum: Vehicles.compactCrossoverSUV.engineRpmMaximum,
+          engineRpmIdle: Vehicles.compactCrossoverSUV.engineRpmIdle,
+          transmissionRatios: Vehicles.compactCrossoverSUV.transmissionRatios,
+          differentialRatio: Vehicles.compactCrossoverSUV.differentialRatio,
+          tireCircumference: Vehicles.compactCrossoverSUV.tireCircumference,
+          tireFrictionCoefficient:
+              Vehicles.compactCrossoverSUV.tireFrictionCoefficient,
+          dragCoefficient: Vehicles.compactCrossoverSUV.dragCoefficient,
+          weight: Vehicles.compactCrossoverSUV.weight,
+          torqueCurve: Vehicles.compactCrossoverSUV.torqueCurve,
+          frontalArea: Vehicles.compactCrossoverSUV.frontalArea,
         ),
         equals(Vehicles.compactCrossoverSUV),
       );

@@ -1,4 +1,24 @@
+import 'dart:math';
+
 import 'package:equatable/equatable.dart';
+
+/// Gravity constant in ft/s^2.
+const kGravityFtS2 = 32.174;
+
+/// Air density at sea level in slugs/ft^3.
+const kAirDensitySlugsFt3 = 0.0023769;
+
+/// Inches per foot.
+const kInchesPerFoot = 12;
+
+/// Feet per mile.
+const kFeetPerMile = 5280;
+
+/// Seconds per hour.
+const kSecondsPerHour = 3600;
+
+/// Rolling resistance coefficient of the road.
+const kRoadRollingResistanceCoefficient = 0.015;
 
 /// {@template vehicle_sim}
 /// Simplified vehicle description.
@@ -8,12 +28,15 @@ final class Vehicle extends Equatable {
   Vehicle({
     required this.engineRpmRedline,
     required this.engineRpmMaximum,
-    required this.engineRpmAcceleration,
-    required this.engineRpmDeceleration,
     required this.engineRpmIdle,
     required this.transmissionRatios,
     required this.differentialRatio,
     required this.tireCircumference,
+    required this.tireFrictionCoefficient,
+    required this.dragCoefficient,
+    required this.weight,
+    required this.torqueCurve,
+    required this.frontalArea,
   })  : assert(
           transmissionRatios.isNotEmpty,
           'Must provide at least one gear ratio.',
@@ -51,15 +74,6 @@ final class Vehicle extends Equatable {
   /// the redline range that can result in engine damage.
   final double engineRpmMaximum;
 
-  /// Approximate acceleration for how many RPM would be gained per second if
-  /// the gas pedal was held all the way down.
-  final double engineRpmAcceleration;
-
-  /// Approximate deceleration for how many RPM would be lost per second if
-  /// the gas pedal was released. Assumes the vehicle is in gear (not in
-  /// neutral).
-  final double engineRpmDeceleration;
-
   /// The RPM at which the engine idles when the vehicle is not moving.
   final double engineRpmIdle;
 
@@ -74,15 +88,41 @@ final class Vehicle extends Equatable {
   /// Tire circumference in inches (in).
   final double tireCircumference;
 
+  /// Tire radius (in feet).
+  double get tireRadiusFt => tireCircumference / (2 * pi * kInchesPerFoot);
+
+  /// Tire friction coefficient (μ) for the vehicle.
+  final double tireFrictionCoefficient;
+
+  /// Drag coefficient (Cd) for the vehicle.
+  final double dragCoefficient;
+
+  /// Weight (in lbs).
+  final double weight;
+
+  /// Torque curve in ft-lb (as a function of engine RPM). The value produced
+  /// by this is always the peak torque for that RPM (as if you were holding the
+  /// accelerator pedal all the way down at that RPM).
+  final double Function(double engineRpm) torqueCurve;
+
+  /// Frontal area in ft^2.
+  final double frontalArea;
+
+  /// Mass (in slugs).
+  double get mass => weight / kGravityFtS2;
+
   @override
   List<Object?> get props => [
         engineRpmRedline,
         engineRpmMaximum,
-        engineRpmAcceleration,
-        engineRpmDeceleration,
         engineRpmIdle,
         transmissionRatios,
         differentialRatio,
         tireCircumference,
+        tireFrictionCoefficient,
+        dragCoefficient,
+        weight,
+        torqueCurve,
+        frontalArea,
       ];
 }
