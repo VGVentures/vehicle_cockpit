@@ -12,8 +12,11 @@ class GaugeGame extends FlameGame with KeyboardEvents {
     required this.onSpeedChanged,
     required this.appTheme,
     required this.l10n,
+    this.timeScale = 2.5,
   });
 
+  /// Speeds vehicle simulation up by this factor to adjust fun factor.
+  final double timeScale;
   final VehicleSim sim;
   final ThemeData appTheme;
   final AppLocalizations l10n;
@@ -82,9 +85,12 @@ class GaugeGame extends FlameGame with KeyboardEvents {
 
   @override
   void update(double dt) {
-    sim.simulate(dt, hittingGas ? 1.0 : 0.0);
+    sim.simulate(dt * timeScale, hittingGas ? 1.0 : -1.3);
 
-    gauge.setProgress(sim.engineRpm / sim.vehicle.engineRpmMaximum, dt);
+    gauge.setProgress(
+      sim.engineRpm / sim.vehicle.engineRpmMaximum,
+      dt,
+    );
     speedometer.speed = sim.speed;
     gear.gearText.text = sim.gear.toString();
 

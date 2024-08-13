@@ -73,28 +73,15 @@ class VehicleSim {
   static const downshiftTolerance = 0.3;
 
   /// Simulate the vehicle for a given time [delta] (in seconds).
-  /// Note that [acceleratorPedal] is a percentage between 0 and 1, where 0
+  /// Note that [acceleratorPedal] is a percentage, where 0
   /// represents no fuel being applied and 1 represents full throttle.
   ///
   /// When finished, the [engineRpm] will be updated based on the vehicle's
   /// acceleration or deceleration, and the [gear] may be adjusted based on the
   /// current RPM and upshift/downshift threshold.
   void simulate(double delta, double acceleratorPedal) {
-    assert(
-      acceleratorPedal >= 0 && acceleratorPedal <= 1,
-      'Accelerator pedal value must be between 0 and 1.',
-    );
-
-    var throttle = acceleratorPedal;
-
-    if (acceleratorPedal == 0) {
-      // Apply reverse force if not accelerating — just a fudge to make the
-      // demo feel better and decelerate faster.
-      throttle = -0.6;
-    }
-
     // Figure out how much torque should be added to the engine.
-    final engineTorque = vehicle.torqueCurve(_engineRpm) * throttle;
+    final engineTorque = vehicle.torqueCurve(_engineRpm) * acceleratorPedal;
     final wheelTorque = engineTorque * gearRatio * vehicle.differentialRatio;
     final wheelForce = wheelTorque / vehicle.tireRadiusFt;
     final maxTractionForce = vehicle.tireFrictionCoefficient * vehicle.weight;
