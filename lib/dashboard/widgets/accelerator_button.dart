@@ -16,12 +16,12 @@ class _AcceleratorButtonState extends State<AcceleratorButton> {
   bool _isPressed = false;
 
   void _accelerate(_) {
-    _game.accelerate();
+    _game.acceleratorPedalPushed();
     setState(() => _isPressed = true);
   }
 
   void _release([_]) {
-    _game.release();
+    _game.acceleratorPedalReleased();
     setState(() => _isPressed = false);
   }
 

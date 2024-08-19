@@ -77,20 +77,22 @@ class LapSectionState extends State<LapSection> {
   }
 
   void newLap(AnimationStatus status) {
-    if (status == AnimationStatus.completed) {
-      setState(() {
-        if (stopwatch.elapsed < bestTime || bestLap == 0) {
-          bestTime = stopwatch.elapsed;
-          bestLap = currentLap;
-        }
-        currentLap++;
-        stopwatch.reset();
-        setLapTime();
-        widget.controller
-          ..reset()
-          ..forward();
-      });
+    if (status != AnimationStatus.completed) {
+      return;
     }
+
+    setState(() {
+      if (stopwatch.elapsed < bestTime || bestLap == 0) {
+        bestTime = stopwatch.elapsed;
+        bestLap = currentLap;
+      }
+      currentLap++;
+      stopwatch.reset();
+      setLapTime();
+      widget.controller
+        ..reset()
+        ..forward();
+    });
   }
 
   String _lapTime(Duration duration) {

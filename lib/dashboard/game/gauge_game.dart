@@ -4,14 +4,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:vehicle_cockpit/dashboard/dashboard.dart';
 import 'package:vehicle_cockpit/l10n/l10n.dart';
+import 'package:vehicle_sim/vehicle_sim.dart';
 
 class GaugeGame extends FlameGame with KeyboardEvents {
   GaugeGame({
+    required this.sim,
     required this.onSpeedChanged,
     required this.appTheme,
     required this.l10n,
+    this.timeScale = 2.5,
   });
 
+  /// Speeds vehicle simulation up by this factor to adjust fun factor.
+  final double timeScale;
+  final VehicleSim sim;
   final ThemeData appTheme;
   final AppLocalizations l10n;
   final ValueChanged<double> onSpeedChanged;
@@ -24,24 +30,29 @@ class GaugeGame extends FlameGame with KeyboardEvents {
   @override
   Color backgroundColor() => Colors.transparent;
 
-  void accelerate() => hittingGas = true;
+  void acceleratorPedalPushed() => hittingGas = true;
 
-  void release() => hittingGas = false;
+  void acceleratorPedalReleased() => hittingGas = false;
 
   @override
   KeyEventResult onKeyEvent(
     KeyEvent event,
     Set<LogicalKeyboardKey> keysPressed,
   ) {
-    final isKeyDown = event is KeyDownEvent || event is KeyRepeatEvent;
+    final isPressed = event is KeyDownEvent || event is KeyRepeatEvent;
+    final wasReleased = event is KeyUpEvent;
 
-    final isSpace = keysPressed.contains(LogicalKeyboardKey.space);
-
-    if (isSpace && isKeyDown) {
-      accelerate();
-    } else {
-      release();
+    if (event.logicalKey != LogicalKeyboardKey.space ||
+        (!isPressed && !wasReleased)) {
+      return KeyEventResult.ignored;
     }
+
+    if (isPressed) {
+      acceleratorPedalPushed();
+    } else {
+      acceleratorPedalReleased();
+    }
+
     return KeyEventResult.handled;
   }
 
@@ -51,8 +62,8 @@ class GaugeGame extends FlameGame with KeyboardEvents {
       gauge = GaugeComponent(
         size: Vector2.all(340),
         position: size / 2,
-        maxRpm: 9,
-        dangerZone: 8,
+        maxRpm: (sim.vehicle.engineRpmMaximum / 1000).round(),
+        dangerZone: (sim.vehicle.engineRpmRedline / 1000).round(),
         appTheme: appTheme,
       ),
     );
@@ -74,18 +85,16 @@ class GaugeGame extends FlameGame with KeyboardEvents {
 
   @override
   void update(double dt) {
-    var rpm = gauge.progress;
-    var speed = speedometer.speed;
-    if (hittingGas) {
-      rpm += .008;
-      speed += rpm / 8;
-    } else {
-      rpm -= .008;
-      speed -= (speed / 500) + .02;
-    }
-    onSpeedChanged(speed);
-    gauge.progress = rpm;
-    speedometer.speed = speed;
+    sim.simulate(dt * timeScale, hittingGas ? 1.0 : -1.3);
+
+    gauge.setProgress(
+      sim.engineRpm / sim.vehicle.engineRpmMaximum,
+      dt,
+    );
+    speedometer.speed = sim.speed;
+    gear.gearText.text = sim.gear.toString();
+
+    onSpeedChanged(sim.speed);
 
     super.update(dt);
   }

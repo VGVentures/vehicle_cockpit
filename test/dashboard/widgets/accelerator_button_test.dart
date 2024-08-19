@@ -22,7 +22,7 @@ void main() {
         );
         await tester.tap(find.byType(AcceleratorButton));
 
-        verify(() => game.accelerate()).called(1);
+        verify(() => game.acceleratorPedalPushed()).called(1);
       },
     );
 
@@ -34,7 +34,7 @@ void main() {
         );
         await tester.tap(find.byType(AcceleratorButton));
 
-        verify(() => game.release()).called(1);
+        verify(() => game.acceleratorPedalReleased()).called(1);
       },
     );
   });

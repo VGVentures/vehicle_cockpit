@@ -55,26 +55,6 @@ class Gear extends PositionComponent with HasGameRef<GaugeGame> {
     size.addListener(_buildPath);
   }
 
-  @override
-  void update(double dt) {
-    final speed = gameRef.speedometer.speed;
-    if (speed <= 0) {
-      gearText.text = 'N';
-    } else if (speed <= 10) {
-      gearText.text = '1';
-    } else if (speed <= 15) {
-      gearText.text = '2';
-    } else if (speed <= 35) {
-      gearText.text = '3';
-    } else if (speed <= 55) {
-      gearText.text = '4';
-    } else if (speed <= 65) {
-      gearText.text = '5';
-    } else {
-      gearText.text = '6';
-    }
-  }
-
   void _buildPath() {
     final dimensions = size.toRect();
     const curveOffset = 15.0;

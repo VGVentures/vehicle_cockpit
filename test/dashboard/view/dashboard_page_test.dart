@@ -36,6 +36,21 @@ void main() {
           );
         },
       );
+
+      testWidgets('stops animating if speed is less than 0', (tester) async {
+        final controller = AnimationController(
+          duration: const Duration(milliseconds: 5000),
+          vsync: const TestVSync(),
+        );
+
+        await tester.pumpApp(
+          Dashboard(animationController: controller),
+        );
+
+        tester.state<DashboardState>(find.byType(Dashboard)).onSpeedChanged(-1);
+
+        expect(controller.isAnimating, isFalse);
+      });
     });
 
     testWidgets(

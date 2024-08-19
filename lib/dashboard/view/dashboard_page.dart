@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:vehicle_cockpit/dashboard/dashboard.dart';
 import 'package:vehicle_cockpit/l10n/l10n.dart';
 import 'package:vehicle_cockpit/ui/ui.dart';
+import 'package:vehicle_sim/vehicle_sim.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({
@@ -23,12 +24,16 @@ class DashboardState extends State<Dashboard>
   late final AnimationController _controller;
 
   void onSpeedChanged(double speed) {
+    if (speed <= 0) {
+      _controller.stop();
+      return;
+    }
+
     // Based on the max speed of 160mph, 0.222222 miles would be the distance
     // covered in 5000 milliseconds if going max speed.
+
     const distance = 0.222222;
     final timeInMilliseconds = (distance / speed) * 3600 * 1000;
-
-    if (speed <= 0) _controller.stop();
 
     _controller
       ..duration = Duration(
@@ -59,6 +64,7 @@ class DashboardState extends State<Dashboard>
     final l10n = context.l10n;
     final theme = Theme.of(context);
     final game = GaugeGame(
+      sim: VehicleSim(vehicle: Vehicles.compactCrossoverSUV),
       appTheme: theme,
       l10n: l10n,
       onSpeedChanged: onSpeedChanged,
